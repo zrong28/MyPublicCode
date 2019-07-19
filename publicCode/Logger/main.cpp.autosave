@@ -1,0 +1,16 @@
+#include <iostream>
+#include <CLogWthSqlite.h>
+
+using namespace std;
+
+int main(int argc, char *argv[])
+{
+    SQLiteWrapper db;
+    db.Open("./test.db");
+    CLogWthSqlite::getInstance()->init(&db,"tb_logs","time","text","level",255);
+    
+    CLogWthSqlite::getInstance()->write_log(CLogger::LOGS_LEVEL::INFO,"日志---%d,%d,%d",1,2,3);
+    
+    CLogWthSqlite::getInstance()->deleteLogs(1);
+    return 0;
+}
